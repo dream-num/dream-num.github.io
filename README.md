@@ -6,7 +6,7 @@ In the project directory, you can run:
 
 ### `npm run schema`
 
-Build json schema for validation.
+Build json schema for validation. Need to build json schema after any change in `IDocumentData` type.
 
 ### `npm start`
 

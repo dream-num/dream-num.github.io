@@ -127,6 +127,10 @@ function getParagraphsAndSectionErrors(
         results.push('> the number of custom ranges in customRanges field does not match the number of custom range in dataStream');
     }
 
+    if (!dataStream.endsWith('\r\n')) {
+        results.push('> dataStream does not end with \\r\\n');
+    }
+
     return results;
 }
 
