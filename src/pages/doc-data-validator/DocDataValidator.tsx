@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { DocDataValidator } from '../../doc-data-validator/validator';
 import { schemaRule } from '../../doc-data-validator/rules/rule-schema';
+import { indexValidationRule } from '../../doc-data-validator/rules/rule-index-validate';
+import { documentFlavorRule } from '../../doc-data-validator/rules/rule-document-style';
 
 import './index.css';
-import { paragraphSectionBreakRule } from '../../doc-data-validator/rules/rule-paragraph-sectionbreak';
 
 const validator = new DocDataValidator();
 
 validator.addRule(schemaRule);
-validator.addRule(paragraphSectionBreakRule);
+validator.addRule(indexValidationRule);
+validator.addRule(documentFlavorRule);
 
 export function DocumentDataValidator() {
     const [hasValidated, setHasValidated] = useState(false);

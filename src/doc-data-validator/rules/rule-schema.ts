@@ -13,7 +13,7 @@ export const schemaRule: IRule = {
         if (!validate(docData)) {
             return (validate.errors ?? [])
                 .filter(e => typeof e.message === 'string')
-                .map(e => e.message!);
+                .map(e => `> ${e.message!}`);
         }
 
         return [];
