@@ -15,6 +15,15 @@
     margin-top: 20px;
 }
 
+.doc-data-validator .results {
+    text-align: left;
+}
+
 .doc-data-validator .error {
     color: #F44336;
+}
+
+.doc-data-validator .success {
+    color: #4CAF50;
+    text-align: center;
 }

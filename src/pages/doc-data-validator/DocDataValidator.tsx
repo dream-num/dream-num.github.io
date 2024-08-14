@@ -29,7 +29,6 @@ export function DocumentDataValidator() {
     }
 
     function handleTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-        console.log(event.target.value);
         setData(event.target.value);
     }
 
@@ -51,7 +50,7 @@ export function DocumentDataValidator() {
                     results.map((result, index) => (
                         <p className="error" key={index}>{result}</p>
                     ))
-                    : <p>{ hasValidated ? '验证通过' : '无结果'}</p>}
+                    : <p className="success">{ hasValidated ? '验证通过' : '无结果'}</p>}
             </div>
         </div>
     </div>);
