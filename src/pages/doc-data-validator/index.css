@@ -1,0 +1,20 @@
+.doc-data-validator {
+    width: 800px;
+    margin: 50px auto;
+}
+
+.doc-data-validator .data {
+    width: 100%;
+    min-height: 300px;
+    padding: 10px;
+}
+
+.doc-data-validator .valid-btn {
+    width: 80px;
+    height: 38px;
+    margin-top: 20px;
+}
+
+.doc-data-validator .error {
+    color: #F44336;
+}
