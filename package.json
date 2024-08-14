@@ -22,7 +22,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build",
+    "deploy": "gh-pages -b deploy -d build",
     "schema": "node ./scripts/gen-schema.mjs",
     "start": "react-scripts start",
     "build": "react-scripts build",
