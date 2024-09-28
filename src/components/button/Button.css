@@ -6,7 +6,7 @@
     border: none;
   }
   
-  /* Primary 按钮样式 */
+  /* Primary */
   .button.primary {
     background-color: #007bff;
     color: #fff;
@@ -16,7 +16,7 @@
     background-color: #0056b3;
   }
   
-  /* Default 按钮样式 */
+  /* Default */
   .button.default {
     background-color: #f8f9fa;
     color: #212529;
@@ -27,7 +27,7 @@
     background-color: #e2e6ea;
   }
   
-  /* Plain Text 按钮样式 */
+  /* Plain Text */
   .button.plain-text {
     background: none;
     color: #007bff;

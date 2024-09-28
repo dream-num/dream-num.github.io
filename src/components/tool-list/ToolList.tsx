@@ -1,4 +1,3 @@
-// src/ToolList.tsx
 import React from 'react';
 import './ToolList.css';
 import { tools } from '../../data/tools';
