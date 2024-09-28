@@ -1,30 +1,30 @@
-.doc-data-validator {
+.sheet-data-validator {
     width: 800px;
     margin: 50px auto;
     text-align: center;
 }
 
-.doc-data-validator .data {
+.sheet-data-validator .data {
     width: 100%;
     min-height: 300px;
     padding: 10px;
 }
 
-.doc-data-validator .valid-btn {
+.sheet-data-validator .valid-btn {
     width: 80px;
     height: 38px;
     margin-top: 20px;
 }
 
-.doc-data-validator .results {
+.sheet-data-validator .results {
     text-align: left;
 }
 
-.doc-data-validator .error {
+.sheet-data-validator .error {
     color: #F44336;
 }
 
-.doc-data-validator .success {
+.sheet-data-validator .success {
     color: #4CAF50;
     text-align: center;
 }
