@@ -16,3 +16,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `npm run deploy`
 
 Deploy to github pages.
+
+### How to add more tools
+
+1. Add a tool information in `tools.ts`, which will be added to the homepage list
+2. Create a new folder in the `pages` directory to write tool routes, and add the routes to `App.tsx`
