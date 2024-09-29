@@ -6,7 +6,7 @@ const ajv = new Ajv();
 // validate is a type guard for MyData - type is inferred from schema type
 const validate = ajv.compile(schema);
 
-export const schemaRule: IRule = {
+export const sheetSchemaRule: IRule = {
     name: 'json-schema-validate',
     handler: (sheetData) => {
         if (!validate(sheetData)) {

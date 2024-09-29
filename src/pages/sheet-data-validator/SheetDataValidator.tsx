@@ -3,8 +3,12 @@ import { DocDataValidator } from '../../doc-data-validator/validator';
 
 import './index.css';
 import Button from '../../components/button/Button';
+import { sheetSchemaRule } from './validator/rule-schema';
 
 const validator = new DocDataValidator();
+
+
+validator.addRule(sheetSchemaRule);
 
 export function SpreadsheetDataValidator() {
     const [hasValidated, setHasValidated] = useState(false);
