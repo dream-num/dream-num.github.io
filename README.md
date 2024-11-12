@@ -21,3 +21,4 @@ Deploy to github pages.
 
 1. Add a tool information in `tools.ts`, which will be added to the homepage list
 2. Create a new folder in the `pages` directory to write tool routes, and add the routes to `App.tsx`
+3. Import the component into `App.tsx`

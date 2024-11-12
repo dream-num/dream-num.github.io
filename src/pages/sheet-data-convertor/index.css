@@ -1,0 +1,29 @@
+.sheet-data-convertor {
+  width: 80%;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.conversion-tool {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.conversion-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+textarea {
+  width: 45%;
+  height: 260px;
+  resize: none;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

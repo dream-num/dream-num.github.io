@@ -6,6 +6,7 @@ import "./App.css";
 import ToolList from "./components/tool-list/ToolList";
 import { SpreadsheetDataValidator } from "./pages/sheet-data-validator/SheetDataValidator";
 import ToolLayout from "./components/tool-layout/ToolLayout";
+import { SpreadsheetDataConvertor } from "./pages/sheet-data-convertor/SheetDataConvertor";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
         <Route
           path="sheet-data-validator"
           element={<SpreadsheetDataValidator />}
+        />
+        <Route
+          path="sheet-data-convertor"
+          element={<SpreadsheetDataConvertor />}
         />
       </Route>
     </Routes>
