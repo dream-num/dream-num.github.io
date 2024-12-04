@@ -4,20 +4,19 @@ import "./index.css";
 import Button from "../../components/button/Button";
 import { transformSnapshotJsonToWorkbookData } from "./util";
 import { transformWorkbookDataToSnapshotJson } from "@univerjs-pro/exchange-client";
+import { downloadJSONString } from "../../common/utils/file";
 
 export function SpreadsheetDataConvertor() {
-  const [iWorkbookData1, setIWorkbookData1] = useState("");
-  const [snapshot1, setSnapshot1] = useState("");
-  const [snapshot2, setSnapshot2] = useState("");
-  const [iWorkbookData2, setIWorkbookData2] = useState("");
+  const [workbookData, setIWorkbookData] = useState("");
+  const [snapshot, setSnapshot] = useState("");
 
   const convertToSnapshot = async () => {
     try {
       const snapshot = await transformWorkbookDataToSnapshotJson(
-        JSON.parse(iWorkbookData1)
+        JSON.parse(workbookData)
       );
       const converted = JSON.stringify(snapshot, null, 2);
-      setSnapshot1(converted);
+      setSnapshot(converted);
     } catch (error) {
       alert("Invalid JSON input for IWorkbookData");
     }
@@ -26,13 +25,29 @@ export function SpreadsheetDataConvertor() {
   const convertToIWorkbookData = () => {
     try {
       const workbookData = transformSnapshotJsonToWorkbookData(
-        JSON.parse(snapshot2)
+        JSON.parse(snapshot)
       );
       const converted = JSON.stringify(workbookData, null, 2);
-      setIWorkbookData2(converted);
+      setIWorkbookData(converted);
     } catch (error) {
       alert("Invalid JSON input for Snapshot");
     }
+  };
+
+  const downloadWorkbookData = () => {
+    if (workbookData === "") {
+      return;
+    }
+
+    downloadJSONString(workbookData, "workbookData");
+  };
+
+  const downloadSnapshot = () => {
+    if (snapshot === "") {
+      return;
+    }
+
+    downloadJSONString(snapshot, "snapshot");
   };
 
   return (
@@ -51,36 +66,38 @@ export function SpreadsheetDataConvertor() {
         <div className="conversion-tool">
           {/* Conversion Tool 1 */}
           <div className="conversion-section">
-            <textarea
-              value={iWorkbookData1}
-              onChange={(e) => setIWorkbookData1(e.target.value)}
-              placeholder="Enter IWorkbookData JSON"
-            />
-            <Button btnType="primary" onClick={convertToSnapshot}>
-              Convert
-            </Button>
-            <textarea
-              value={snapshot1}
-              readOnly
-              placeholder="Converted Snapshot JSON"
-            />
-          </div>
+            <div className="text-area">
+              <b>IWorkbookData</b>
+              <textarea
+                value={workbookData}
+                onChange={(e) => setIWorkbookData(e.target.value)}
+                placeholder="Enter IWorkbookData JSON"
+              />
+              <Button btnType="plain-text" onClick={downloadWorkbookData}>
+                Download📥
+              </Button>
+            </div>
 
-          {/* Conversion Tool 2 */}
-          <div className="conversion-section">
-            <textarea
-              value={snapshot2}
-              onChange={(e) => setSnapshot2(e.target.value)}
-              placeholder="Enter Snapshot JSON"
-            />
-            <Button btnType="primary" onClick={convertToIWorkbookData}>
-              Convert
-            </Button>
-            <textarea
-              value={iWorkbookData2}
-              readOnly
-              placeholder="Converted IWorkbookData JSON"
-            />
+            <div className="button-group">
+              <Button btnType="default" onClick={convertToSnapshot}>
+                Convert➡️
+              </Button>
+              <Button btnType="default" onClick={convertToIWorkbookData}>
+                ⬅️Convert
+              </Button>
+            </div>
+
+            <div className="text-area">
+              <b>Snapshot</b>
+              <textarea
+                value={snapshot}
+                readOnly
+                placeholder="Converted Snapshot JSON"
+              />
+              <Button btnType="plain-text" onClick={downloadSnapshot}>
+                Download📥
+              </Button>
+            </div>
           </div>
         </div>
       </div>

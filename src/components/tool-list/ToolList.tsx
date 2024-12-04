@@ -1,6 +1,6 @@
 import React from 'react';
 import './ToolList.css';
-import { tools } from '../../data/tools';
+import { tools } from '../../common/data/tools';
 import ToolCard from '../tool-card/ToolCard';
 
 const ToolList: React.FC = () => {

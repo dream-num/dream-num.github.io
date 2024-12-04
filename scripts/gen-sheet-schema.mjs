@@ -17,7 +17,7 @@ const compilerOptions = {
 const basePath = "./my-dir";
 
 const program = TJS.getProgramFromFiles(
-  [resolve("node_modules/@univerjs/core/lib/types/types/interfaces/i-workbook-data.d.ts")],
+  [resolve("node_modules/@univerjs/core/lib/types/sheets/typedef.d.ts")],
   compilerOptions,
   basePath
 );

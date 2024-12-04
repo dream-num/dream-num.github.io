@@ -17,6 +17,7 @@
 }
 
 .sheet-data-validator .results {
+    margin-top: 20px;
     text-align: left;
 }
 
@@ -27,4 +28,22 @@
 .sheet-data-validator .success {
     color: #4CAF50;
     text-align: center;
+}
+
+
+.results .error {
+    border: 1px solid #e74c3c;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fbeaea;
+    border-radius: 5px;
+}
+
+.results .error p {
+    margin: 5px 0;
+}
+
+.results .success {
+    color: #27ae60;
+    font-weight: bold;
 }

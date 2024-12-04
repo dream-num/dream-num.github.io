@@ -1,17 +1,13 @@
 export const schema = {
-  "description": "Properties of a workbook's configuration",
+  "description": "Snapshot of a workbook.",
   "type": "object",
   "properties": {
     "id": {
-      "description": "unit id",
+      "description": "Id of the Univer Sheet.",
       "type": "string"
     },
-    "rev": {
-      "description": "Revision of this spreadsheet. Would be used in collaborated editing. Starts from one.",
-      "type": "number"
-    },
     "name": {
-      "description": "Name of the spreadsheet.",
+      "description": "Name of the Univer Sheet.",
       "type": "string"
     },
     "appVersion": {
@@ -19,25 +15,42 @@ export const schema = {
       "type": "string"
     },
     "locale": {
-      "$ref": "#/definitions/LocaleType"
+      "$ref": "#/definitions/LocaleType",
+      "description": "Locale of the document."
     },
     "styles": {
-      "$ref": "#/definitions/IKeyType<Nullable<IStyleData>>",
-      "description": "Style reference."
+      "$ref": "#/definitions/Record<string,Nullable<IStyleData>>",
+      "description": "Style references."
     },
     "sheetOrder": {
+      "description": "Ids of {@link IWorksheetData}s of this Univer Sheet in sequence order.",
       "type": "array",
       "items": {
         "type": "string"
       }
     },
     "sheets": {
+      "description": "Data of each {@link IWorksheetData} in this Univer Sheet.",
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/Partial<IWorksheetData>"
       }
     },
+    "defaultStyle": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/IStyleData"
+        },
+        {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      ]
+    },
     "resources": {
+      "description": "Resources of the Univer Sheet. It is used to store the data of other plugins.",
       "type": "array",
       "items": {
         "type": "object",
@@ -57,45 +70,25 @@ export const schema = {
           "name"
         ]
       }
-    },
-    "shouldStartRenderingImmediately": {
-      "description": "should start renderLoop Immediately\ndefault is true",
-      "type": "boolean"
-    },
-    "container": {
-      "description": "HTML selector\ndefault is null",
-      "type": "string"
     }
   },
   "required": [
-    "appVersion",
-    "id",
-    "locale",
-    "name",
-    "sheetOrder",
-    "sheets",
-    "styles"
   ],
   "definitions": {
     "LocaleType": {
-      "description": "Copyright 2023-present DreamNum Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
+      "description": "Built-in locales.",
       "type": "string",
       "enum": [
         "enUS",
+        "frFR",
         "zhCN",
         "ruRU",
         "zhTW",
-        "viVN"
+        "viVN",
+        "faIR"
       ]
     },
-    "IKeyType<Nullable<IStyleData>>": {
-      "description": "Custom type of key",
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/T"
-      }
-    },
-    "T": {
+    "Record<string,Nullable<IStyleData>>": {
       "type": "object"
     },
     "Partial<IWorksheetData>": {
@@ -121,7 +114,6 @@ export const schema = {
           "type": "number"
         },
         "freeze": {
-          "description": "Copyright 2023-present DreamNum Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
           "$ref": "#/definitions/IFreeze"
         },
         "rowCount": {
@@ -173,6 +165,19 @@ export const schema = {
           "items": {
             "$ref": "#/definitions/Partial<IColumnData>"
           }
+        },
+        "defaultStyle": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/IStyleData"
+            },
+            {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          ]
         },
         "rowHeader": {
           "type": "object",
@@ -231,7 +236,6 @@ export const schema = {
       }
     },
     "IFreeze": {
-      "description": "Copyright 2023-present DreamNum Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
       "type": "object",
       "properties": {
         "xSplit": {
@@ -259,7 +263,6 @@ export const schema = {
       "type": "object",
       "properties": {
         "rangeType": {
-          "description": "Copyright 2023-present DreamNum Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
           "enum": [
             0,
             1,
@@ -348,7 +351,7 @@ export const schema = {
           "description": "Id of the formula."
         },
         "custom": {
-          "$ref": "#/definitions/Nullable<Record<string,any>>",
+          "$ref": "#/definitions/CustomData",
           "description": "User stored custom fields"
         }
       }
@@ -377,9 +380,11 @@ export const schema = {
           "type": "number"
         },
         "locale": {
-          "description": "Copyright 2023-present DreamNum Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
+          "description": "Built-in locales.",
           "enum": [
             "enUS",
+            "faIR",
+            "frFR",
             "ruRU",
             "viVN",
             "zhCN",
@@ -454,14 +459,6 @@ export const schema = {
           "items": {
             "type": "string"
           }
-        },
-        "shouldStartRenderingImmediately": {
-          "description": "should start renderLoop Immediately\ndefault is true",
-          "type": "boolean"
-        },
-        "container": {
-          "description": "HTML selector\ndefault is null",
-          "type": "string"
         }
       },
       "required": [
@@ -509,7 +506,7 @@ export const schema = {
         "customRanges": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ICustomRange"
+            "$ref": "#/definitions/ICustomRange<Record<string,any>>"
           }
         },
         "customDecorations": {
@@ -1174,7 +1171,8 @@ export const schema = {
         "documentFlavor": {
           "enum": [
             0,
-            1
+            1,
+            2
           ],
           "type": "number"
         },
@@ -1393,6 +1391,14 @@ export const schema = {
             1
           ],
           "type": "number"
+        },
+        "zeroWidthParagraphBreak": {
+          "description": "General Boolean Enum",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "number"
         }
       }
     },
@@ -1455,7 +1461,8 @@ export const schema = {
         "tableId"
       ]
     },
-    "ICustomRange": {
+    "ICustomRange<Record<string,any>>": {
+      "description": "Block element, link like, disabled to self nested",
       "type": "object",
       "properties": {
         "startIndex": {
@@ -1468,11 +1475,15 @@ export const schema = {
           "type": "string"
         },
         "rangeType": {
-          "$ref": "#/definitions/CustomRangeType"
+          "type": "number"
         },
         "wholeEntity": {
           "description": "display as a whole-entity",
           "type": "boolean"
+        },
+        "properties": {
+          "description": "properties of custom range,\nfor example, hyperlink: `{ url: string }`",
+          "$ref": "#/definitions/Record<string,any>"
         }
       },
       "required": [
@@ -1482,18 +1493,8 @@ export const schema = {
         "startIndex"
       ]
     },
-    "CustomRangeType": {
-      "type": "number",
-      "enum": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7
-      ]
+    "Record<string,any>": {
+      "type": "object"
     },
     "ICustomDecoration": {
       "type": "object",
@@ -1520,7 +1521,10 @@ export const schema = {
     },
     "CustomDecorationType": {
       "type": "number",
-      "const": 0
+      "enum": [
+        0,
+        9999
+      ]
     },
     "Record<string,string>": {
       "type": "object"
@@ -1550,7 +1554,8 @@ export const schema = {
         "documentFlavor": {
           "enum": [
             0,
-            1
+            1,
+            2
           ],
           "type": "number"
         },
@@ -1913,7 +1918,7 @@ export const schema = {
           "$ref": "#/definitions/INumberUnit"
         },
         "hRule": {
-          "$ref": "#/definitions/TableCellHeightRule"
+          "$ref": "#/definitions/TableRowHeightRule"
         }
       },
       "required": [
@@ -1921,7 +1926,7 @@ export const schema = {
         "val"
       ]
     },
-    "TableCellHeightRule": {
+    "TableRowHeightRule": {
       "type": "number",
       "enum": [
         0,
@@ -2154,10 +2159,6 @@ export const schema = {
         "paragraphProperties": {
           "description": "Properties of paragraph style",
           "$ref": "#/definitions/IParagraphStyle"
-        },
-        "paragraphTextStyle": {
-          "description": "Properties of text style",
-          "$ref": "#/definitions/ITextStyle"
         },
         "bulletAlignment": {
           "$ref": "#/definitions/BulletAlignment"
@@ -2729,8 +2730,7 @@ export const schema = {
         }
       ]
     },
-    "Nullable<Record<string,any>>": {
-      "description": "Copyright 2023-present DreamNum Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.",
+    "CustomData": {
       "anyOf": [
         {
           "$ref": "#/definitions/Record<string,any>"
@@ -2739,9 +2739,6 @@ export const schema = {
           "type": "null"
         }
       ]
-    },
-    "Record<string,any>": {
-      "type": "object"
     },
     "Partial<IRowData>": {
       "type": "object",
@@ -2769,6 +2766,14 @@ export const schema = {
             1
           ],
           "type": "number"
+        },
+        "s": {
+          "$ref": "#/definitions/Nullable<string|IStyleData>",
+          "description": "style id"
+        },
+        "custom": {
+          "$ref": "#/definitions/CustomData",
+          "description": "User stored custom fields"
         }
       }
     },
@@ -2786,109 +2791,16 @@ export const schema = {
             1
           ],
           "type": "number"
+        },
+        "s": {
+          "$ref": "#/definitions/Nullable<string|IStyleData>",
+          "description": "style id"
+        },
+        "custom": {
+          "$ref": "#/definitions/CustomData",
+          "description": "User stored custom fields"
         }
       }
-    },
-    "IRangeType": {
-      "description": "range types\n\nAllow users to provide one of three formats, we need to convert to IRange to store",
-      "anyOf": [
-        {
-          "$ref": "#/definitions/IRange"
-        },
-        {
-          "$ref": "#/definitions/IRangeArrayData"
-        },
-        {
-          "$ref": "#/definitions/IRangeCellData"
-        },
-        {
-          "type": "string"
-        }
-      ]
-    },
-    "IRangeArrayData": {
-      "description": "One of the range types,\n\ne.g.,\n{\n row:[0,1],\n column:[0,1]\n}\ntodo\n\ntrue false 枚举\nmeans \"A1:B2\"",
-      "type": "object",
-      "properties": {
-        "row": {
-          "$ref": "#/definitions/IRowStartEndData",
-          "description": "row"
-        },
-        "column": {
-          "$ref": "#/definitions/IColumnStartEndData",
-          "description": "column"
-        }
-      },
-      "required": [
-        "column",
-        "row"
-      ]
-    },
-    "IRowStartEndData": {
-      "description": "Row data type",
-      "anyOf": [
-        {
-          "type": "array",
-          "items": {
-            "type": "number"
-          }
-        },
-        {
-          "type": "array",
-          "items": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "minItems": 2,
-          "maxItems": 2
-        }
-      ]
-    },
-    "IColumnStartEndData": {
-      "description": "Column data type",
-      "anyOf": [
-        {
-          "type": "array",
-          "items": {
-            "type": "number"
-          }
-        },
-        {
-          "type": "array",
-          "items": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "number"
-            }
-          ],
-          "minItems": 2,
-          "maxItems": 2
-        }
-      ]
-    },
-    "IRangeCellData": {
-      "description": "The row and column numbers represent a cell",
-      "type": "object",
-      "properties": {
-        "row": {
-          "description": "row",
-          "type": "number"
-        },
-        "column": {
-          "description": "column",
-          "type": "number"
-        }
-      },
-      "required": [
-        "column",
-        "row"
-      ]
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#"

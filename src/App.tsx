@@ -7,6 +7,7 @@ import ToolList from "./components/tool-list/ToolList";
 import { SpreadsheetDataValidator } from "./pages/sheet-data-validator/SheetDataValidator";
 import ToolLayout from "./components/tool-layout/ToolLayout";
 import { SpreadsheetDataConvertor } from "./pages/sheet-data-convertor/SheetDataConvertor";
+import { ResponseDataLoader } from "./pages/response-data-loader/ResponseDataLoader";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
         <Route
           path="sheet-data-convertor"
           element={<SpreadsheetDataConvertor />}
+        />
+        <Route
+          path="response-data-loader"
+          element={<ResponseDataLoader />}
         />
       </Route>
     </Routes>

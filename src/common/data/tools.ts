@@ -1,5 +1,5 @@
 // src/data/tools.ts
-import { Tool } from '../types/Tool';
+import { Tool } from '../../types/Tool';
 
 export const tools: Tool[] = [
   {
@@ -22,5 +22,12 @@ export const tools: Tool[] = [
     description: 'Format conversion between IWorkbookData and Snapshot.',
     emoji: '🔄',
     path: '/tool/sheet-data-convertor',
-  }
+  },
+  {
+    id: '4',
+    name: 'Response Data Loader',
+    description: 'Load snapshot and block in collaborative response into Univer.',
+    emoji: '⏳',
+    path: '/tool/response-data-loader',
+  },
 ];

@@ -1,5 +1,4 @@
 import { b64DecodeUnicode, transformSnapshotToWorkbookData } from "@univerjs-pro/collaboration";
-import { IDeserializedSheetBlock } from "@univerjs/protocol";
 
 // TODO@Dushusir use real interface after exported from univer
 export function transformSnapshotJsonToWorkbookData(json: any){
@@ -12,7 +11,7 @@ export function transformSnapshotJsonToWorkbookData(json: any){
             ...block,
             data: block.data ? JSON.parse(b64DecodeUnicode(block.data as unknown as string)) : undefined,
         };
-    }) as IDeserializedSheetBlock[];
+    })
 
     return transformSnapshotToWorkbookData(snapshot, b64decodedBlocks);
 }
