@@ -1,0 +1,8 @@
+{
+  "docDataModelDataValidator_title": "Univer Doc Data Model Data Validator",
+  "docDataModelDataValidator_desc": "Paste the Doc Data Model into the input box below (ensuring it is a JSON object), and click the validation button to verify if the data meets the requirements.",
+  "check_btn": "Check",
+  "check_pass": "PASS",
+  "no_result": "No results",
+  "next": "next"
+}

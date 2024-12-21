@@ -8,8 +8,15 @@ import { SpreadsheetDataValidator } from "./pages/sheet-data-validator/SheetData
 import ToolLayout from "./components/tool-layout/ToolLayout";
 import { SpreadsheetDataConvertor } from "./pages/sheet-data-convertor/SheetDataConvertor";
 import { ResponseDataLoader } from "./pages/response-data-loader/ResponseDataLoader";
+import './i18n/config';
+
+// import { useTranslation } from 'react-i18next';
+
 
 function App() {
+
+  // const { t } = useTranslation();
+  // console.log('t',t);
   return (
     <Routes>
       <Route path="/" element={<ToolList />} />

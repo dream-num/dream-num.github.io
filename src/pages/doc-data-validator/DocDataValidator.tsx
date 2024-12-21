@@ -3,6 +3,7 @@ import { DocDataValidator } from '../../doc-data-validator/validator';
 import { schemaRule } from '../../doc-data-validator/rules/rule-schema';
 import { indexValidationRule } from '../../doc-data-validator/rules/rule-index-validate';
 import { documentFlavorRule } from '../../doc-data-validator/rules/rule-document-style';
+import { useTranslation } from 'react-i18next';
 
 import './index.css';
 
@@ -16,6 +17,7 @@ export function DocumentDataValidator() {
     const [hasValidated, setHasValidated] = useState(false);
     const [data, setData] = useState('');
     const [results, setResults] = useState<string[]>([]);
+
 
     function handleValidate() {
         try {
@@ -31,10 +33,11 @@ export function DocumentDataValidator() {
     function handleTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
         setData(event.target.value);
     }
+    const { t } = useTranslation();
 
     return (<div className='doc-data-validator'>
-        <h2>Univer Doc Data Model 数据验证器</h2>
-        <p>将 Doc Data Model 黏贴到下面输入框（保证是 JSON 对象），点击验证按钮，即可验证数据是否符合要求</p>
+        <h2>{t('docDataModelDataValidator_title')}</h2>
+        <p>{t('docDataModelDataValidator_desc')}</p>
         <div className='container'>
             <textarea
                 className='data'
@@ -44,13 +47,13 @@ export function DocumentDataValidator() {
             <button
                 className="valid-btn"
                 onClick={handleValidate}
-            >验证</button>
+            >{t('check_btn')}</button>
             <div className='results'>
                 {results.length ?
                     results.map((result, index) => (
                         <p className="error" key={index}>{result}</p>
                     ))
-                    : <p className="success">{ hasValidated ? '验证通过' : '无结果'}</p>}
+                    : <p className="success">{ hasValidated ? t('check_pass') : t('no_result')}</p>}
             </div>
         </div>
     </div>);
