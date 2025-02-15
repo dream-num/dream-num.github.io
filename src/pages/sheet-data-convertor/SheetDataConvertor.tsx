@@ -50,6 +50,51 @@ export function SpreadsheetDataConvertor() {
     downloadJSONString(snapshot, "snapshot");
   };
 
+  interface FileUploadEvent extends React.ChangeEvent<HTMLInputElement> {
+    target: HTMLInputElement & EventTarget;
+  }
+
+  const handleUploadWorkbookData = (event: FileUploadEvent) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        if (e.target && typeof e.target.result === "string") {
+          const snapshot = await transformWorkbookDataToSnapshotJson(
+            JSON.parse(e.target.result)
+          );
+          const converted = JSON.stringify(snapshot, null, 2);
+
+          const fileName = file.name.replace(".json", "-snapshot");
+          downloadJSONString(converted, fileName);
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  const handleUploadSnapshot = (event: FileUploadEvent) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target && typeof e.target.result === "string") {
+
+          const workbookData = transformSnapshotJsonToWorkbookData(
+            JSON.parse(e.target.result)
+          );
+
+          const converted = JSON.stringify(workbookData, null, 2);
+
+          const fileName = file.name.replace(".json", "-workbookData");
+          downloadJSONString(converted, fileName);
+
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
+  
   return (
     <div className="sheet-data-convertor">
       <h2>Univer Sheet Data Format Convertor</h2>
@@ -76,6 +121,11 @@ export function SpreadsheetDataConvertor() {
               <Button btnType="plain-text" onClick={downloadWorkbookData}>
                 Download📥
               </Button>
+
+              <div>
+                <p>Convert from IWorkbookData JSON file</p>
+                <input type="file" accept=".json" onChange={handleUploadWorkbookData} />
+              </div>
             </div>
 
             <div className="button-group">
@@ -91,12 +141,17 @@ export function SpreadsheetDataConvertor() {
               <b>Snapshot</b>
               <textarea
                 value={snapshot}
-                readOnly
-                placeholder="Converted Snapshot JSON"
+                onChange={(e) => setSnapshot(e.target.value)}
+                placeholder="Enter Snapshot JSON"
               />
               <Button btnType="plain-text" onClick={downloadSnapshot}>
                 Download📥
               </Button>
+
+              <div>
+                <p>Convert from Snapshot JSON file</p>
+                <input type="file" accept=".json" onChange={handleUploadSnapshot} />
+              </div>
             </div>
           </div>
         </div>
